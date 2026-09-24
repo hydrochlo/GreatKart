@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'category',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'greatkart.wsgi.application'
 
+# Mentioning that I'm using my own custom user model
+AUTH_USER_MODEL = 'accounts.Account'
 
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
