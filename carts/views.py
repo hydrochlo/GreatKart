@@ -42,6 +42,8 @@ def _cart_id(request):
     
 def add_cart(request, product_id):
     product = Product.objects.get(id=product_id) # Get the product
+    color = request.GET['color']
+    size = request.GET['size']
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request)) # Get the cart using the cart_id present in the session
     except Cart.DoesNotExist:
