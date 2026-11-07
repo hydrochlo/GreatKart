@@ -1,14 +1,13 @@
-{% include 'base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-content padding-y">
 
 <!-- ============================ COMPONENT REGISTER   ================================= -->
 	<div class="card mx-auto" style="max-width:520px; margin-top:40px;">
       <article class="card-body">
 		<header class="mb-4"><h4 class="card-title">Sign up</h4></header>
-		<form action="{% url 'register' %}">
+		<form action="{% url 'register' %}" method="POST">
 			{% csrf_token %}
 			
 				<div class="form-row">
@@ -46,29 +45,12 @@
 			    <div class="form-group">
 			        <button type="submit" class="btn btn-primary btn-block"> Register  </button>
 			    </div> <!-- form-group// -->      
-			        
-			</form>
+			    {{ form.email.errors }}  
+				{{ form.non_field_error }} 
+		</form>
 		</article><!-- card-body.// -->
     </div> <!-- card .// -->
     <p class="text-center mt-4">Have an account? <a href="">Log In</a></p>
     <br><br>
 <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
-
-
-</section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
-
-
-<!-- ========================= FOOTER ========================= -->
-<footer class="section-footer border-top padding-y">
-	<div class="container">
-		<p class="float-md-right"> 
-			&copy Copyright 2019 All rights reserved
-		</p>
-		<p>
-			<a href="#">Terms and conditions</a>
-		</p>
-	</div><!-- //container -->
-</footer>
-<!-- ========================= FOOTER END // ========================= -->
- {% endblock %}
+{% endblock %}
