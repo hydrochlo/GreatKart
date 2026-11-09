@@ -12,7 +12,13 @@ class RegistrationForm(forms.ModelForm):
     }))
     class Meta:
         model = Account
-        fields = ['first_name', 'last_name', 'phone_number', 'email', 'password']
+        fields = [
+            'first_name', 
+            'last_name', 
+            'phone_number', 
+            'email', 
+            'password'
+        ]
         
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs) 
@@ -34,3 +40,6 @@ class RegistrationForm(forms.ModelForm):
             raise forms.ValidationError(
                 "~Password and Confirm Password does not match~"
             )
+            
+# class LoginForm(forms.ModelForm):
+    

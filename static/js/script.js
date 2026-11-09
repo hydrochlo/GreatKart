@@ -52,9 +52,9 @@ $(document).ready(function() {
 	} // end if
 
 
+    setTimeout(function(){
+        $('.alert-message').fadeOut('slow')
+    }, 4000)
 
-
-    
 }); 
 // jquery end
-
