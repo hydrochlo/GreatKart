@@ -9,5 +9,11 @@
             {{ message }}
         </div>
     </div>
+
+    <script>
+    setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 2000);
+    </script>
     {% endfor %}
 {% endif %}
