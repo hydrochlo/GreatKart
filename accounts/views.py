@@ -6,6 +6,8 @@ from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from carts.models import Cart, CartItem
+from carts.views import _cart_id
 
 # Email Verification related
 from django.contrib.sites.shortcuts import get_current_site
@@ -63,12 +65,8 @@ def login(request):
         email = request.POST.get('email', '').strip().lower()
         password = request.POST.get('password', '')
         
-        # Step 1: Check if user exists
         try:
             user_obj = Account.objects.get(email=email)
-            # print(f"User found: {user_obj.email}")
-            # print(f"is_active: {user_obj.is_active}")
-            # print(f"Password match: {user_obj.check_password(password)}")
         except Account.DoesNotExist:
             print("No user exists with this email address.")
         
@@ -76,6 +74,19 @@ def login(request):
         user = auth.authenticate(request, username=email, password=password)
         
         if user is not None:
+            try:
+                cart = Cart.objects.get(cart_id=_cart_id(request))
+                is_cart_item_exists = CartItem.objects.filter(cart=cart).exists()
+                
+                if is_cart_item_exists:
+                    cart_item = CartItem.objects.filter(cart=cart)
+                    
+                    for item in cart_item:
+                        item.user = user
+                        item.save()
+                        print("I'm here")
+            except:
+                pass
             auth.login(request, user)
             messages.success(request, 'You are now logged in.')
             return redirect('dashboard')
